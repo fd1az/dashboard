@@ -6,13 +6,7 @@ const TableRow = ({ title, length, rating, genre, awards }) => {
       <th>{title}</th>
       <td>{length}</td>
       <td>{rating}</td>
-      <td>
-        <ul>
-          {genre?.map((g) => (
-            <li>{g}</li>
-          ))}
-        </ul>
-      </td>
+      <td>{genre?.name}</td>
       <td>{awards}</td>
     </tr>
   );
