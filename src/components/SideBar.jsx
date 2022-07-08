@@ -1,5 +1,11 @@
 import React from 'react';
 import image from '../assets/images/logo-DH.png';
+import { Routes, Route, Link } from 'react-router-dom';
+import GenresInDb from './GenresInDb';
+import ContentWrapper from './ContentWrapper';
+import CardTotals from './CardTotals';
+import Table from './Table';
+import ContentRowMovies from './ContentRowMovies';
 
 const SideBar = () => {
   return (
@@ -23,10 +29,10 @@ const SideBar = () => {
 
         {/* <!-- Nav Item - Dashboard --> */}
         <li className="nav-item active">
-          <a className="nav-link" href="/">
+          <Link to="/" className="nav-link">
             <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard - DH movies</span>
-          </a>
+          </Link>
         </li>
 
         {/* <!-- Divider --> */}
@@ -37,31 +43,37 @@ const SideBar = () => {
 
         {/* <!-- Nav Item - Pages --> */}
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/">
+          <Link to={'/genres'} className={'nav-link collapsed'}>
             <i className="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-          </a>
+            <span>Genres</span>
+          </Link>
         </li>
 
         {/* <!-- Nav Item - Charts --> */}
         <li className="nav-item">
-          <a className="nav-link" href="/">
+          <Link to={'/charts'} className="nav-link">
             <i className="fas fa-fw fa-chart-area"></i>
             <span>Charts</span>
-          </a>
+          </Link>
         </li>
 
         {/* <!-- Nav Item - Tables --> */}
         <li className="nav-item">
-          <a className="nav-link" href="/">
+          <Link to={'table'} className="nav-link">
             <i className="fas fa-fw fa-table"></i>
             <span>Tables</span>
-          </a>
+          </Link>
         </li>
 
         {/* <!-- Divider --> */}
         <hr className="sidebar-divider d-none d-md-block" />
       </ul>
+      <Routes>
+        <Route path="genres" element={<GenresInDb />} />
+        <Route path="charts" element={<ContentRowMovies />} />
+        <Route path="table" element={<Table />} />
+        <Route path="/" element={<ContentWrapper />} />
+      </Routes>
     </>
   );
 };
