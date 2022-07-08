@@ -3,9 +3,9 @@ import image from '../assets/images/logo-DH.png';
 import { Routes, Route, Link } from 'react-router-dom';
 import GenresInDb from './GenresInDb';
 import ContentWrapper from './ContentWrapper';
-import CardTotals from './CardTotals';
 import Table from './Table';
 import ContentRowMovies from './ContentRowMovies';
+import NotFound from './NotFound';
 
 const SideBar = () => {
   return (
@@ -73,6 +73,7 @@ const SideBar = () => {
         <Route path="charts" element={<ContentRowMovies />} />
         <Route path="table" element={<Table />} />
         <Route path="/" element={<ContentWrapper />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
