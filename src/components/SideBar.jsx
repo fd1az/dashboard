@@ -6,6 +6,7 @@ import ContentWrapper from './ContentWrapper';
 import Table from './Table';
 import ContentRowMovies from './ContentRowMovies';
 import NotFound from './NotFound';
+import SearchMovies from './SearchMovies';
 
 const SideBar = () => {
   return (
@@ -64,6 +65,13 @@ const SideBar = () => {
             <span>Tables</span>
           </Link>
         </li>
+        {/* <!-- Nav Item - Tables --> */}
+        <li className="nav-item">
+          <Link to={'search'} className="nav-link">
+            <i className="fas fa-fw fa-film"></i>
+            <span>Search</span>
+          </Link>
+        </li>
 
         {/* <!-- Divider --> */}
         <hr className="sidebar-divider d-none d-md-block" />
@@ -72,6 +80,7 @@ const SideBar = () => {
         <Route path="genres" element={<GenresInDb />} />
         <Route path="charts" element={<ContentRowMovies />} />
         <Route path="table" element={<Table />} />
+        <Route path="search" element={<SearchMovies />} />
         <Route path="/" element={<ContentWrapper />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
