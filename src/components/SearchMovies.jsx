@@ -1,25 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, use } from 'react';
+import { useFetch, useLala } from '../hooks';
 const apiKey = 'a2626ce5';
 
 function SearchMovies() {
-  const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState('star+wars');
   const inputSearch = useRef();
-
-  const keyword = 'PELÍCULA DEMO';
-
-  useEffect(() => {
-    const endpoint = `https://www.omdbapi.com/?s=${search}&apikey=${apiKey}`;
-    fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.Search) {
-          setMovies([...data.Search]);
-        } else {
-          setMovies([]);
-        }
-      });
-  }, [search]);
+  const { error, data, loading } = useFetch(
+    `https://www.omdbapi.com/?s=${search}&apikey=${apiKey}`
+  );
 
   const searchMovie = (e) => {
     e.preventDefault();
@@ -29,7 +17,7 @@ function SearchMovies() {
   };
   // Credenciales de API
   // Intenta poner cualquier cosa antes para probar
-
+  console.log(error, search);
   return (
     <div className="container-fluid">
       {apiKey !== '' ? (
@@ -52,11 +40,12 @@ function SearchMovies() {
           </div>
           <div className="row">
             <div className="col-12">
-              <h2>Películas para la palabra: {keyword}</h2>
+              <h2>Películas para la palabra: {'star wars'}</h2>
             </div>
             {/* Listado de películas */}
-            {movies.length > 0 &&
-              movies.map((movie, i) => {
+            {loading && <p>{'Loading......'}</p>}
+            {data?.Search?.length > 0 &&
+              data?.Search?.map((movie, i) => {
                 return (
                   <div className="col-sm-6 col-md-3 my-4" key={i}>
                     <div className="card shadow mb-4">
@@ -85,10 +74,13 @@ function SearchMovies() {
                 );
               })}
           </div>
-          {movies.length === 0 && (
+          {data?.Search?.length === 0 && (
             <div className="alert alert-warning text-center">
               No se encontraron películas
             </div>
+          )}
+          {error && (
+            <div className="alert alert-warning text-center">Ups se pico!</div>
           )}
         </>
       ) : (
